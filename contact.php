@@ -1,25 +1,30 @@
 <?php
-
-
-  $nombre = $_POST["nombre"];
-  $apellidos = $_POST["apellidos"];
-  $correo = $_POST["correo"];
-  $subject = $_POST["subject"];
-  $mensaje = $_POST["mensaje"];
+  $nombre = "";
+  $apellidos = "";
+  $correo = "";
+  $subject = "";
+  $mensaje = "";
   $errores = [];
-  $claseDiv = "";
-
+  $mensajeExito = "";
+  $claseDiv = "alert alert-info";
+  
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
     $correo = $_POST["correo"];
     $subject = $_POST["subject"];
     $mensaje = $_POST["mensaje"];
+    $mensajeExito = "";
 
     if (empty($nombre)) {
       $errores["nombre"] = "El nombre es requerido.";
     } else {
       $errores["nombre"] = "";
+      $mensajeExito .= "<li>Nombre: $nombre</li>";
+    }
+
+    if (!empty($apellidos)) {
+      $mensajeExito .= "<li>Apellidos: $apellidos</li>";
     }
 
     if (empty($correo)) {
@@ -28,17 +33,21 @@
       $errores["correo"] = "El formato del correo es inválido.";
     } else {
       $errores["correo"] = "";
+      $mensajeExito .= "<li>Correo: $correo</li>";
     }
 
     if (empty($subject)) {
       $errores["subject"] = "El subject es requerido.";
     } else {
       $errores["subject"] = "";
+      $mensajeExito .= "<li>Subject: $subject</li>";
+    }
+
+    if (!empty($mensaje)) {
+      $mensajeExito .= "<li>Mensaje: $mensaje</li>";
     }
 
     if (empty(array_filter($errores))) {
-
-      $mensajeExito = "<li>Nombre: $nombre.</li><li>Apellidos: $apellidos.</li><li>Correo: $correo.</li><li>Subject: $subject.</li><li>Mensaje: $mensaje.</li>";
 
       $nombreFinal = "";
       $apellidosFinal = "";

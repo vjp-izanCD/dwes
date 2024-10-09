@@ -37,12 +37,12 @@
 				echo "<ul>";
 				foreach ($errores as $error) {
 				if (!empty($error)) {
-				echo '<li>' . $error . '</li>';
+				echo "<li>" . $error . "</li>";
 				}
 				}
 
 				if (isset($mensajeExito)) {
-				echo '<div>' . $mensajeExito . '</div>';
+				echo "<div>" . $mensajeExito . "</div>";
 				}
 				echo "</ul>";
 				?>
