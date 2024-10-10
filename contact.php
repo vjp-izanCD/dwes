@@ -6,7 +6,7 @@
   $mensaje = "";
   $errores = [];
   $mensajeExito = "";
-  $claseDiv = "alert alert-info";
+  $claseDiv = "";
   $nombreFinal = "";
   $apellidosFinal = "";
   $correoFinal = "";
@@ -60,6 +60,8 @@
       $subjectFinal = "";
       $mensajeFinal = "";
 
+      $mostrarMensaje = $mensajeExito;
+
       $claseDiv = "alert alert-info";
     }
 
@@ -75,4 +77,5 @@
     }
   }
   require "views/contact.view.php";
+  require "views/utils/utils.php";
 ?>

@@ -1,29 +1,6 @@
 <?php include __DIR__ . "/partials/inicio-doc.parts.php"; ?>
 
-<nav class="navbar navbar-fixed-top navbar-default">
-<div class="container">
-<div class="navbar-header">
-<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a  class="navbar-brand page-scroll" href="#page-top">
-<span>[PHOTO]</span>
-</a>
-</div>
-<div class="collapse navbar-collapse navbar-right" id="menu">
-<ul class="nav navbar-nav">
-<li class=" lien"><a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
-<li class="lien"><a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
-<li class="lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
-<li class="active"><a href="#"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
-</ul>
-</div>
-</div>
-</nav>
-<!-- End of Navigation Bar -->
+<?php include __DIR__ . "/partials/nav.parts.php"; ?>
 
 <!-- Principal Content Start -->
 <div id="contact">
@@ -34,17 +11,17 @@
 			<p>Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
 			<div class="<?php echo $claseDiv; ?>">
 				<?php
-				echo "<ul>";
-				foreach ($errores as $error) {
-				if (!empty($error)) {
-				echo "<li>" . $error . "</li>";
-				}
-				}
+					echo "<ul>";
+					foreach ($errores as $error) {
+					if (!empty($error)) {
+					echo "<li>" . $error . "</li>";
+					}
+					}
 
-				if (isset($mensajeExito)) {
-				echo "<div>" . $mensajeExito . "</div>";
-				}
-				echo "</ul>";
+					if (isset($mostrarMensaje)) {
+					echo "<div>" . $mostrarMensaje . "</div>";
+					}
+					echo "</ul>";
 				?>
 			</div>
 			<form action="<?= $_SERVER["PHP_SELF"] ?>" class="form-horizontal" method="post">
