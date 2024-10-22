@@ -1,5 +1,5 @@
 <?php
-    require "views/utils/utils.php";
+    require_once "utils/utils.php";
 
     $claseActivaHome = "";
     $claseActivaAbout = "";
@@ -17,7 +17,6 @@
         } elseif (strpos($_SERVER["REQUEST_URI"], "contact.php") !== false) {
             $claseActivaContact = "active";
         }
-
     }
 ?>
 

@@ -76,6 +76,6 @@
       $claseDiv = "alert alert-danger";
     }
   }
+  require "utils/utils.php";
   require "views/contact.view.php";
-  require "views/utils/utils.php";
 ?>
