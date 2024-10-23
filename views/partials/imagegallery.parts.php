@@ -5,7 +5,7 @@
             <div class="head text-center">
                 <ul class="list-inline">
                     <li>
-                        <a class="gallery" href="<?php echo $galeria; ?>" data-toggle="tooltip" data-original-title="Quick View">
+                        <a class="gallery" href="<?php echo $gallery; ?>" data-toggle="tooltip" data-original-title="Quick View">
                             <i class="fa fa-eye"></i>
                         </a>
                     </li>

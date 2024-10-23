@@ -42,14 +42,12 @@
            <div id="category1" class="tab-pane active" >
               <div class="row popup-gallery">
                 <?php
-                  // Asegúrate de incluir el archivo donde están definidas las constantes
-                  include_once "entities/imagenGaleria.class.php";
 
                   foreach ($galeria as $imagen) {
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $galeria = $imagen->getUrlGallery();
+                      $gallery = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();
@@ -75,14 +73,14 @@
            <div id="category2" class="tab-pane">
              <div class="row popup-gallery">
               <?php
-                  // Asegúrate de incluir el archivo donde están definidas las constantes
-                  include_once "entities/imagenGaleria.class.php";
+
+                  shuffle($galeria);
 
                   foreach ($galeria as $imagen) {
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $galeria = $imagen->getUrlGallery();
+                      $gallery = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();
@@ -108,14 +106,14 @@
            <div id="category3" class="tab-pane">
              <div class="row popup-gallery">
               <?php
-                  // Asegúrate de incluir el archivo donde están definidas las constantes
-                  include_once "entities/imagenGaleria.class.php";
+
+                  shuffle($galeria);
 
                   foreach ($galeria as $imagen) {
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $galeria = $imagen->getUrlGallery();
+                      $gallery = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();

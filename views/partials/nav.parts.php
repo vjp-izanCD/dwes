@@ -1,24 +1,26 @@
 <?php
     require_once "utils/utils.php";
 
-    $claseActivaHome = "";
+    $claseActivaHome = "active";
     $claseActivaAbout = "";
     $claseActivaBlog = "";
     $claseActivaContact = "";
 
     if ($_SERVER["REQUEST_URI"]) {
-
-        if (strpos($_SERVER["REQUEST_URI"], "index.php") !== false) {
-            $claseActivaHome = "active";
-        } elseif (strpos($_SERVER["REQUEST_URI"], "about.php") !== false) {
+        if (strpos($_SERVER["REQUEST_URI"], "about.php") !== false) {
+            $claseActivaHome = "";
             $claseActivaAbout = "active";
         } elseif (existeOpcionMenuActivaEnArray(["blog", "single_post"])) {
+            $claseActivaHome = "";
             $claseActivaBlog = "active";
         } elseif (strpos($_SERVER["REQUEST_URI"], "contact.php") !== false) {
+            $claseActivaHome = "";
             $claseActivaContact = "active";
+        } elseif (strpos($_SERVER["REQUEST_URI"], "index.php") !== false) {
         }
     }
 ?>
+
 
 <nav class="navbar navbar-fixed-top navbar-default">
     <div class="container">
