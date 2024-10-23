@@ -47,7 +47,7 @@
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $gallery = $imagen->getUrlGallery();
+                      $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();
@@ -80,7 +80,7 @@
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $gallery = $imagen->getUrlGallery();
+                      $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();
@@ -113,7 +113,7 @@
                       $nombre = $imagen->getNombre();
                       $portfolio = $imagen->getUrlPortfolio();
                       $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $gallery = $imagen->getUrlGallery();
+                      $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
                       $downloads = $imagen->getNumDownloads();
