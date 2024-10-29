@@ -13,6 +13,7 @@
       $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
       $imagen = new File("imagen", $tiposAceptados);
       $imagen -> saveUploadFile(imagenGaleria::RUTA_IMAGENES_GALLERY);
+      $imagen -> copyFile(imagenGaleria::RUTA_IMAGENES_GALLERY, imagenGaleria::RUTA_IMAGENES_PORTFOLIO);
       $mensaje = "Datos enviados";
 
     } catch (FileException $exception){
