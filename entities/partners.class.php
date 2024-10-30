@@ -34,6 +34,5 @@
             $this->descripcion = $descripcion;
         }
 
-        
     }
 ?>

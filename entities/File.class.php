@@ -1,39 +1,24 @@
 <?php
 require __DIR__ . "/../exceptions/FileException.class.php";
+include "utils/erroresString.php";
 
 class File {
-    private $file;
-    private $fileName;
+    private $file = "";
+    private $fileName = "";
 
     public function __construct(string $fileName, array $arrTypes) {
-        // Comprobamos si el archivo existe en el array $_FILES
+
+        $this->file = $_FILES[$fileName];
+        $this->fileName = $this->file['name'];
+
         if (!isset($_FILES[$fileName])) {
             throw new FileException("Archivo no encontrado en el array de subida.");
         }
 
-        $this->file = $_FILES[$fileName];
-        $this->fileName = $this->file['name']; // Obtenemos el nombre del archivo
-
-        // Comprobamos si hay errores en la subida
         if ($this->file["error"] !== UPLOAD_ERR_OK) {
-            switch ($this->file["error"]) {
-                case UPLOAD_ERR_INI_SIZE:
-                case UPLOAD_ERR_FORM_SIZE:{
-                    throw new FileException("El archivo excede el tamaño máximo permitido.");
-                    break;
-                }
-                case UPLOAD_ERR_PARTIAL:{
-                    throw new FileException("El archivo fue subido parcialmente.");
-                    break;
-                }
-                default:{
-                    throw new FileException("Error desconocido en la subida.");
-                    break;
-                }
-            }
+            throw new FileException(ERROR_STRINGS[$this->file["error"]]);
         }
 
-        // Comprobamos si el tipo de archivo es soportado
         if (in_array($this->file["type"], $arrTypes) === false) {
             throw new FileException("Tipo de archivo no soportado: " . $this->file["type"]);
         }
@@ -51,10 +36,21 @@ class File {
         $this->fileName = $this->file["name"];
         $ruta = $rutaDestino.$this->fileName;
 
-        if(is_file($ruta) == true){
-            $fechaActual = date("dmYHis");
-            $this->fileName = $this->fileName . "_" . $fechaActual;
-            $ruta = $rutaDestino.$this->fileName;
+        if (is_file($ruta) == true) {
+            $i = 1;
+            $posName = strpos($this->fileName, ".");
+            $name = substr($this->fileName, 0, $posName);
+            $posExtensión = strpos($this->fileName, ".");
+            $extensión = substr($this->fileName, $posExtensión, strlen($this->fileName));
+            
+            $this->fileName = $name . "($i)" . $extensión;
+            $ruta = $rutaDestino . $this->fileName;
+        
+            while (is_file($ruta)) {
+                $i++;
+                $this->fileName = $name . "($i)" . $extensión;
+                $ruta = $rutaDestino . $this->fileName;
+            }
         }
 
         if(move_uploaded_file($this->file["tmp_name"], $ruta) === false){
