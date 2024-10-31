@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . "/../exceptions/FileException.class.php";
-include "utils/erroresString.php";
+include "utils/const.php";
 
 class File {
     private $file = "";
@@ -16,7 +16,7 @@ class File {
         }
 
         if ($this->file["error"] !== UPLOAD_ERR_OK) {
-            throw new FileException(ERROR_STRINGS[$this->file["error"]]);
+            throw new FileException(getErrorString($this->file["error"]));
         }
 
         if (in_array($this->file["type"], $arrTypes) === false) {
