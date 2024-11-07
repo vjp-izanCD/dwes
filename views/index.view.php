@@ -50,7 +50,7 @@
                       $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDownloads();
+                      $downloads = $imagen->getNumDescargas();
 
                       include "views/partials/imagegallery.parts.php";
                   }
@@ -83,7 +83,7 @@
                       $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDownloads();
+                      $downloads = $imagen->getNumDescargas();
 
                       include "views/partials/imagegallery.parts.php";
                   }
@@ -116,7 +116,7 @@
                       $urlGaleria = $imagen->getUrlGallery();
                       $visualizaciones = $imagen->getNumVisualizaciones();
                       $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDownloads();
+                      $downloads = $imagen->getNumDescargas();
 
                       include "views/partials/imagegallery.parts.php";
                   }

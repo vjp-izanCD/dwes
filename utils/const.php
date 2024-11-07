@@ -7,6 +7,8 @@
 
     define("ERROR_CON_BD", 12);
 
+    define("ERROR_INS_BD", 13);
+
     $errorStrings = [
         UPLOAD_ERR_OK => "No hay ningún error.",
         UPLOAD_ERR_INI_SIZE => "El archivo es demasiado grande.",
@@ -20,7 +22,8 @@
         ERROR_MV_UP_FILE => "No se ha podido mover el archivo de destino.",
         ERROR_EXECUTE_STATEMENT => "No se ha podido ejecutar la consulta.",
         ERROR_APP_CORE => "No se ha encontrado la clave del contenedor.",
-        ERROR_CON_BD => "No se ha podido crear la conexión con la bd."
+        ERROR_CON_BD => "No se ha podido crear la conexión con la bd.",
+        ERROR_INS_BD => "No se ha podido realizar la conexión con la bd."
     ];
     define('ERROR_STRINGS', $errorStrings);
 

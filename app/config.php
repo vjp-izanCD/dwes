@@ -1,5 +1,5 @@
 <?php
-return["DATABASE" => [
+return["database" => [
     "name" => "proyecto",
     "username" => "user",
     "password" => "user",

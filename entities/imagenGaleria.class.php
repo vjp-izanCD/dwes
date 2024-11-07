@@ -1,14 +1,28 @@
 <?php
-    class imagenGaleria{
+require_once "entities/database/IEntity.class.php";
+    class imagenGaleria implements IEntity{
         private $nombre;
         private $descripcion;
         private $numVisualizaciones;
         private $numLikes;
-        private $numDownloads;
+        private $numDescargas;
         private $id;
 
         const RUTA_IMAGENES_PORTFOLIO = "images/index/portfolio/";
         const RUTA_IMAGENES_GALLERY = "images/index/gallery/";
+
+        public function __construct(string $nombre = "", string $descripcion = "", int $numVisualizaciones = 0, int $numLikes = 0, int $numDescargas = 0) {
+
+            $this->id = null;
+            $this->nombre = $nombre;
+            $this->descripcion = $descripcion;
+            $this->numVisualizaciones = $numVisualizaciones;
+            $this->numLikes = $numLikes;
+            $this->numDescargas = $numDescargas;
+            
+        }
+
+
 
         public function getId(){
             return $this->id;
@@ -30,8 +44,8 @@
             return $this->numLikes;
         }
 
-        public function getNumDownloads(){
-            return $this->numDownloads;
+        public function getNumDescargas(){
+            return $this->numDescargas;
         }
 
         public function setNombre($nombre){
@@ -50,8 +64,8 @@
             $this->numLikes = $numLikes;
         }
 
-        public function setNumDownloads($numDownloads){
-            $this->numDownloads = $numDownloads;
+        public function setNumDescargas($numDescargas){
+            $this->numDescargas = $numDescargas;
         }
 
 
@@ -63,6 +77,15 @@
             return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
         }
 
-
+        public function toArray():array{
+            return [
+                "id"=>$this->getId(),
+                "nombre"=>$this->getNombre(),
+                "descripcion"=>$this->getDescripcion(),
+                "numVisualizaciones"=>$this->getNumVisualizaciones(),
+                "numLikes"=>$this->getNumLikes(),
+                "numDescargas"=>$this->getNumDescargas()
+            ];
+        }
     }
 ?>

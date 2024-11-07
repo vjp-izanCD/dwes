@@ -5,6 +5,7 @@
   require "entities/connection.class.php";
   require_once "entities/queryBuilder.class.php";
   require_once "exceptions/appException.class.php";
+  require_once "entities/repository/imagenGaleriaRepositorio.class.php";
 
   $errores = [];
   $descripcion = "";
@@ -16,6 +17,8 @@
 
     $connection = App::getConnection();
 
+    $imagenRepositorio = new ImagenGaleriaRepositorio();
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
         $descripcion = trim(htmlspecialchars($_POST["descripcion"]));
@@ -24,36 +27,22 @@
         $imagen->saveUploadFile(imagenGaleria::RUTA_IMAGENES_GALLERY);
         $imagen->copyFile(imagenGaleria::RUTA_IMAGENES_GALLERY, imagenGaleria::RUTA_IMAGENES_PORTFOLIO);
 
-        $sql = "INSERT INTO imagenes (nombre, descripcion) VALUES (:nombre, :descripcion)";
+        $imagenGaleria = new imagenGaleria($imagen->getFileName(), $descripcion);
+        $imagenRepositorio->save($imagenGaleria);
 
-        $pdoStatement = $connection->prepare($sql);
-
-        $parametersStatementArray = [":nombre"=>$imagen->getFileName(), ":descripcion"=>$descripcion];
-        if ($pdoStatement->execute($parametersStatementArray) === false){
-          $errores[] = "No se ha podido guardar la imagen en la BD";
-        } else {
-          $descripcion = "";
-          $mensaje = "Imagen guardada";
-        }
-        $querySql = "Select * from imagenes";
-        $queryStatement = $connection->query($querySql);
-        while($row = $queryStatement->fetch()){
-          echo "ID: " . $row["id"];
-          echo "Nombre: " . $row["nombre"];
-          echo "Descripcion: " . $row["descripcion"];
-        }
+        $descripcion = "";
+        $mensaje = "Imagen guardada";
     } 
-
-    $queryBuilder = new QueryBuilder($connection);
-    $imagenes = $queryBuilder->findAll("imagenes", "imagenGaleria");
   } catch (FileException $exception) {
     $errores[] = $exception->getMessage();
-  }
-  catch (QueryException $exception){
+  } catch (QueryException $exception){
     $errores[] = $exception->getMessage();
-  }
-  catch (AppException $exception){
+  } catch (AppException $exception){
     $errores[] = $exception->getMessage();
+  } catch (PDOException $exception){
+    $errores[] = $exception->getMessage();
+  } finally {
+    $imagenes = $imagenRepositorio->findAll();
   }
   require "views/galeria.view.php";
 ?>

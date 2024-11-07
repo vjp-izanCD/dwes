@@ -11,9 +11,9 @@
       $descripcion = "descripción imagen $i";
       $numVisualizaciones = rand(0, 2000);
       $numLikes = rand(0, 1000);
-      $numDownloads = rand(0, 500);
+      $numDescargas = rand(0, 500);
 
-      $galeria[] = new ImagenGaleria($nombre, $descripcion, $numVisualizaciones, $numLikes, $numDownloads);
+      $galeria[] = new ImagenGaleria($nombre, $descripcion, $numVisualizaciones, $numLikes, $numDescargas);
   }
 
   $partners = [];

@@ -1,35 +1,47 @@
 <?php
+
 require_once "utils/const.php";
 require_once "exceptions/queryException.class.php";
-    class QueryBuilder {
+require_once "entities/app.class.php";
 
-        /**
-         *
-         * @var PDO
-         */
-        private $connection;
+abstract class QueryBuilder {
 
-        /**
-         *
-         * @param PDO $connection
-         */
-        public function __construct(PDO $connection) {
-            $this->connection = $connection;
+    private $connection;
 
+    private $table;
+
+    private $classEntity;
+
+    public function __construct($table, $classEntity) {
+        $this->connection = App::getConnection();
+        $this->table = $table;
+        $this->classEntity = $classEntity;
+    }
+
+    public function findAll() {
+        $sqlStatement = "SELECT * FROM " . $this->table;
+
+        $pdoStatement = $this->connection->prepare($sqlStatement);
+
+        if (!$pdoStatement->execute()) {
+            throw new QueryException(getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
         }
 
-        public function findAll(string $table, string $classEntitie) {
-            $sqlStatement = "Select * from " . $table;
+        return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
+    }
 
-            $pdoStatement = $this->connection->prepare($sqlStatement);
+    public function save(IEntity $entity): void {
+        $parameters = $entity->toArray();
 
-            $pdoStatement->execute();
-            if($pdoStatement->execute() === false){
-                throw new QueryException(getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
-            }
+        $sql = sprintf("insert into %s (%s) values (%s)", $this->table, implode(", ", array_keys($parameters)), ":" . implode(", :", array_keys($parameters)));
 
-            return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $classEntitie);
-            
+        try{
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($parameters);
+        } catch (PDOException $excepcion) {
+            throw new PDOException(getErrorString(ERROR_INS_BD));
         }
     }
+}
+
 ?>
