@@ -7,11 +7,12 @@ require_once "entities/database/IEntity.class.php";
         private $numLikes;
         private $numDescargas;
         private $id;
+        private $categoria;
 
         const RUTA_IMAGENES_PORTFOLIO = "images/index/portfolio/";
         const RUTA_IMAGENES_GALLERY = "images/index/gallery/";
 
-        public function __construct(string $nombre = "", string $descripcion = "", int $numVisualizaciones = 0, int $numLikes = 0, int $numDescargas = 0) {
+        public function __construct(string $nombre = "", string $descripcion = "", int $numVisualizaciones = 0, int $numLikes = 0, int $numDescargas = 0, int $categoria = 0) {
 
             $this->id = null;
             $this->nombre = $nombre;
@@ -19,7 +20,7 @@ require_once "entities/database/IEntity.class.php";
             $this->numVisualizaciones = $numVisualizaciones;
             $this->numLikes = $numLikes;
             $this->numDescargas = $numDescargas;
-            
+            $this->categoria = $categoria;
         }
 
 
@@ -48,6 +49,10 @@ require_once "entities/database/IEntity.class.php";
             return $this->numDescargas;
         }
 
+        public function getCategoria(){
+            return $this->categoria;
+        }
+
         public function setNombre($nombre){
             $this->nombre = $nombre;
         }
@@ -68,6 +73,10 @@ require_once "entities/database/IEntity.class.php";
             $this->numDescargas = $numDescargas;
         }
 
+        public function setCategoria($categoria){
+            $this->categoria = $categoria;
+        }
+
 
         public function getUrlPortfolio(){
             return self::RUTA_IMAGENES_PORTFOLIO . $this->getNombre();
@@ -84,7 +93,8 @@ require_once "entities/database/IEntity.class.php";
                 "descripcion"=>$this->getDescripcion(),
                 "numVisualizaciones"=>$this->getNumVisualizaciones(),
                 "numLikes"=>$this->getNumLikes(),
-                "numDescargas"=>$this->getNumDescargas()
+                "numDescargas"=>$this->getNumDescargas(),
+                "categoria"=>$this->getCategoria()
             ];
         }
     }

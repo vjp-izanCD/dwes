@@ -38,8 +38,24 @@ abstract class QueryBuilder {
         try{
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
+
+            if($entity instanceof imagenGaleria){
+                $this->incrementaNumCategorias($entity->getCategoria());
+            }
         } catch (PDOException $excepcion) {
             throw new PDOException(getErrorString(ERROR_INS_BD));
+        }
+    }
+
+    public function incrementaNumCategorias(int $categoria) {
+        try{
+            $this->connection->beginTransaction();
+            $sql = "UPDATE categorias SET numImagenes=numImagenes+1 WHERE id=$categoria";
+            $this->connection->exec($sql);
+            $this->connection->commit();
+        } catch (Exception $exception) {
+            $this->connection->rollBack();
+            throw new Exception($exception->getMessage());
         }
     }
 }
