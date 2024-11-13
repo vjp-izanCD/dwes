@@ -20,7 +20,7 @@
     $connection = App::getConnection();
 
     $imagenRepositorio = new ImagenGaleriaRepositorio();
-    $categoriaRepositorio = new categoriaRepositorio();
+    $categoriaRepositorio = new CategoriaRepositorio();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $descripcion = trim(htmlspecialchars($_POST["descripcion"] ?? ''));
@@ -28,29 +28,34 @@
 
         $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
 
-        $imagen = new File("imagen", $tiposAceptados);
-        $imagen->saveUploadFile(imagenGaleria::RUTA_IMAGENES_GALLERY);
-        $imagen->copyFile(imagenGaleria::RUTA_IMAGENES_GALLERY, imagenGaleria::RUTA_IMAGENES_PORTFOLIO);
+        // Verificar si se ha subido un archivo
+        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+            $imagen = new File("imagen", $tiposAceptados);
+            $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
+            $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
 
-        $imagenGaleria = new imagenGaleria($imagen->getFileName(), $descripcion, $categoria);
-        $imagenRepositorio->save($imagenGaleria);
+            $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
+            $imagenRepositorio->save($imagenGaleria);
 
-        $descripcion = "";
-        $mensaje = "Imagen guardada";
+            $descripcion = "";
+            $mensaje = "Imagen guardada";
+        } else {
+            $errores[] = "Error al subir la imagen.";
+        }
     } 
   } catch (FileException $exception) {
-    $errores[] = $exception->getMessage();
+      $errores[] = $exception->getMessage();
   } catch (QueryException $exception) {
-    $errores[] = $exception->getMessage();
+      $errores[] = $exception->getMessage();
   } catch (AppException $exception) {
-    $errores[] = $exception->getMessage();
+      $errores[] = $exception->getMessage();
   } catch (PDOException $exception) {
-    $errores[] = $exception->getMessage();
+      $errores[] = $exception->getMessage();
   } catch (Exception $exception) {
-    $errores[] = $exception->getMessage();
+      $errores[] = $exception->getMessage();
   } finally {
-    $imagenes = $imagenRepositorio->findAll();
-    $categorias = $categoriaRepositorio->findAll();
+      $imagenes = $imagenRepositorio->findAll();
+      $categorias = $categoriaRepositorio->findAll();
   }
 
   require "views/galeria.view.php";

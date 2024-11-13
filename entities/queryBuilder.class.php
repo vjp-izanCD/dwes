@@ -43,7 +43,8 @@ abstract class QueryBuilder {
                 $this->incrementaNumCategorias($entity->getCategoria());
             }
         } catch (PDOException $excepcion) {
-            throw new PDOException(getErrorString(ERROR_INS_BD));
+            throw new PDOException($excepcion->getMessage());
+            //throw new PDOException(getErrorString(ERROR_INS_BD));
         }
     }
 

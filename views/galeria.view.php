@@ -33,11 +33,11 @@
                     <div class="col-xs-12">
                         <label for="label-control">Categoria</label>
                         <select class="form-control" name="categoria">
-                            <?php foreach($categorias as $categoria) : ?>
-                                <option value="<?= $categoria->getId() ?>">
-                                    <?= $categoria->getNombre() ?>
-                                </option>
-                            <?php endforeach; ?>
+                        <?php foreach($categorias as $categoria): ?>
+                            <option value="<?= htmlspecialchars($categoria->getId()) ?>">
+                                <?= htmlspecialchars($categoria->getNombre()) ?>
+                            </option>
+                        <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -63,26 +63,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($imagenes as $img): ?>
-                        <tr>
-                            <th scope="row"><?= $img->getId() ?></th>
-                            <td>
-                                <img src="<?= $img->getUrlGallery() ?>" alt="<?= $img->getDescripcion() ?>" title="<?= $img->getDescripcion() ?>" width="100px">
-                            </td>
-                            <td>
-                                <?= $categorias[$img->getCategoria() -1]->getNombre() ?>
-                            </td>
-                            <td>
-                                <?= $img->getNumVisualizaciones() ?>
-                            </td>
-                            <td>
-                                <?= $img->getNumLikes() ?>
-                            </td>
-                            <td>
-                                <?= $img->getNumDescargas() ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                <?php foreach($imagenes as $img): ?>
+                    <tr>
+                        <th scope="row"><?= htmlspecialchars($img->getId()) ?></th>
+                        <td>
+                            <img src="<?= htmlspecialchars($img->getUrlGallery()) ?>" alt="<?= htmlspecialchars($img->getDescripcion()) ?>" title="<?= htmlspecialchars($img->getDescripcion()) ?>" width="100px">
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($categorias[$img->getCategoria() - 1]->getNombre()) ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($img->getNumVisualizaciones()) ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($img->getNumLikes()) ?>
+                        </td>
+                        <td>
+                            <?= htmlspecialchars($img->getNumDescargas()) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
             </div>
