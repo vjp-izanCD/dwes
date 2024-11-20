@@ -1,15 +1,11 @@
 <?php
   require "utils/utils.php";
-  require "entities/imagenGaleria.class.php";
-  require "entities/partners.class.php";
-  include_once "partners.php";
   require "entities/File.class.php";
+  require "entities/partners.class.php";
   require "entities/connection.class.php";
   require_once "entities/queryBuilder.class.php";
   require_once "exceptions/appException.class.php";
-  require_once "entities/repository/imagenGaleriaRepositorio.class.php";
-  require_once "entities/repository/categoriaRepositorio.class.php";
-  require "entities/categoria.class.php";
+  require_once "entities/repository/partnersRepositorio.class.php";
 
   $errores = [];
   $descripcion = "";
@@ -21,24 +17,18 @@
     App::bind("config", $config);
     $connection = App::getConnection();
 
-    $imagenRepositorio = new ImagenGaleriaRepositorio();
-    $categoriaRepositorio = new CategoriaRepositorio();
+    $partnerRepositorio = new PartnersRepositorio();
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $descripcion = trim(htmlspecialchars($_POST["descripcion"] ?? ''));
-        $categoria = trim(htmlspecialchars($_POST["categoria"] ?? ''));
+        $descripcion = trim(htmlspecialchars($_POST["nombre"] ?? ''));
 
         $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
 
         // Verificar si se ha subido un archivo
         if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
             $imagen = new File("imagen", $tiposAceptados);
-            $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
-            $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
-
-            $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
-            $imagenRepositorio->save($imagenGaleria);
-
+            
             $descripcion = "";
             $mensaje = "Imagen guardada";
         } else {
@@ -56,19 +46,8 @@
   } catch (Exception $exception) {
       $errores[] = $exception->getMessage();
   } finally {
-      $imagenes = $imagenRepositorio->findAll();
-      $categorias = $categoriaRepositorio->findAll();
+      $partners = $partnerRepositorio->findAll();
   }
 
-  $partners = [];
-  for ($i = 1; $i <= 3 ; $i++) { 
-    $partner = new Partner("Partners $i", "log$i.jpg", "Descripción del Partners $i");
-    array_push($partners, $partner);
-  }
-
-  if (count($partners) > 3) {
-    $partners = obtenerTresAleatorios($partners);
-  }
-
-  require "views/index.view.php";
+  require "views/partners.view.php";
 ?>

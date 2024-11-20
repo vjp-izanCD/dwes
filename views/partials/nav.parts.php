@@ -21,7 +21,7 @@
         } elseif (strpos($_SERVER["REQUEST_URI"], "galeria.php") !== false) {
             $claseActivaHome = "";
             $claseActivaGaleria = "active";
-        } elseif (strpos($_SERVER["REQUEST_URI"], "partners.php") !== false) {
+        } elseif (strpos($_SERVER["REQUEST_URI"], "asociados.php") !== false) {
             $claseActivaHome = "";
             $claseActivaAsociados = "active";
         } elseif (strpos($_SERVER["REQUEST_URI"], "index.php") !== false) {
@@ -50,7 +50,7 @@
                 <li class="<?php echo $claseActivaBlog; ?> lien"><a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
                 <li class="<?php echo $claseActivaContact; ?> lien"><a href="contact.php"><i class="fa fa-phone-square sr-icons"></i> Contact</a></li>
                 <li class="<?php echo $claseActivaGaleria; ?> lien"><a href="galeria.php"><i class="fa fa-image sr-icons"></i> Galeria</a></li>
-                <li class="<?php echo $claseActivaAsociados; ?> lien"><a href="partners.php"><i class="fa fa-hand-o-right sr-icons"></i> Asociados</a></li>
+                <li class="<?php echo $claseActivaAsociados; ?> lien"><a href="asociados.php"><i class="fa fa-hand-o-right sr-icons"></i> Asociados</a></li>
             </ul>
         </div>
     </div>

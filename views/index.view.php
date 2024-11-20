@@ -43,14 +43,14 @@
               <div class="row popup-gallery">
                 <?php
 
-                  foreach ($galeria as $imagen) {
-                      $nombre = $imagen->getNombre();
-                      $portfolio = $imagen->getUrlPortfolio();
-                      $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $urlGaleria = $imagen->getUrlGallery();
-                      $visualizaciones = $imagen->getNumVisualizaciones();
-                      $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDescargas();
+                  foreach ($imagenes as $img) {
+                      $nombre = $img->getNombre();
+                      $portfolio = $img->getUrlPortfolio();
+                      $descripcion = "Imagen de la galería " . $img->getDescripcion();
+                      $urlGaleria = $img->getUrlGallery();
+                      $visualizaciones = $img->getNumVisualizaciones();
+                      $likes = $img->getNumLikes();
+                      $downloads = $img->getNumDescargas();
 
                       include "views/partials/imagegallery.parts.php";
                   }
@@ -74,19 +74,19 @@
              <div class="row popup-gallery">
               <?php
 
-                  shuffle($galeria);
+                  shuffle($imagenes);
 
-                  foreach ($galeria as $imagen) {
-                      $nombre = $imagen->getNombre();
-                      $portfolio = $imagen->getUrlPortfolio();
-                      $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $urlGaleria = $imagen->getUrlGallery();
-                      $visualizaciones = $imagen->getNumVisualizaciones();
-                      $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDescargas();
+                  foreach ($imagenes as $img) {
+                    $nombre = $img->getNombre();
+                    $portfolio = $img->getUrlPortfolio();
+                    $descripcion = "Imagen de la galería " . $img->getDescripcion();
+                    $urlGaleria = $img->getUrlGallery();
+                    $visualizaciones = $img->getNumVisualizaciones();
+                    $likes = $img->getNumLikes();
+                    $downloads = $img->getNumDescargas();
 
-                      include "views/partials/imagegallery.parts.php";
-                  }
+                    include "views/partials/imagegallery.parts.php";
+                }
                 ?>
               </div>
               <nav class="text-center">
@@ -107,19 +107,19 @@
              <div class="row popup-gallery">
               <?php
 
-                  shuffle($galeria);
+                shuffle($imagenes);
 
-                  foreach ($galeria as $imagen) {
-                      $nombre = $imagen->getNombre();
-                      $portfolio = $imagen->getUrlPortfolio();
-                      $descripcion = "Imagen de la galería " . $imagen->getNombre();
-                      $urlGaleria = $imagen->getUrlGallery();
-                      $visualizaciones = $imagen->getNumVisualizaciones();
-                      $likes = $imagen->getNumLikes();
-                      $downloads = $imagen->getNumDescargas();
+                foreach ($imagenes as $img) {
+                  $nombre = $img->getNombre();
+                  $portfolio = $img->getUrlPortfolio();
+                  $descripcion = "Imagen de la galería " . $img->getDescripcion();
+                  $urlGaleria = $img->getUrlGallery();
+                  $visualizaciones = $img->getNumVisualizaciones();
+                  $likes = $img->getNumLikes();
+                  $downloads = $img->getNumDescargas();
 
-                      include "views/partials/imagegallery.parts.php";
-                  }
+                  include "views/partials/imagegallery.parts.php";
+                }
                 ?>
              </div>
               <nav class="text-center">

@@ -1,15 +1,21 @@
 <?php
     class Partner{
+        private $id;
         private $nombre = "";
         private $logo = "";
         private $descripcion = "";
 
         public function __construct($nombre, $logo, $descripcion) {
+            $this->id = null;
             $this->nombre = $nombre;
             $this->logo = $logo;
             $this->descripcion = $descripcion;
         }
 
+        public function getId(){
+            return $this->id;
+        }
+        
         public function getNombre(){
             return $this->nombre;
         }
