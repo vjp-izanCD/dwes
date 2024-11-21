@@ -48,6 +48,21 @@ abstract class QueryBuilder {
         }
     }
 
+    public function savePartner(IEntity $entity): void {
+        $parameters = $entity->toArray();
+
+        $sql = sprintf("insert into %s (%s) values (%s)", $this->table, implode(", ", array_keys($parameters)), ":" . implode(", :", array_keys($parameters)));
+
+        try{
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($parameters);
+
+        } catch (PDOException $excepcion) {
+            throw new PDOException($excepcion->getMessage());
+            //throw new PDOException(getErrorString(ERROR_INS_BD));
+        }
+    }
+
     public function incrementaNumCategorias(int $categoria) {
         try{
             $this->connection->beginTransaction();

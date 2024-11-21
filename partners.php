@@ -2,8 +2,8 @@
   function mostrarPartners($partners) {
     foreach ($partners as $partner) {
       echo "<ul class=\"list-inline\">";
-      echo "<li><img src=\"images/index/" . $partner->getLogo() . "\" alt=\"" . $partner->getDescripcion() . "\" title=\"" . $partner->getNombre() . "\"></li>";
-      echo "<li>" . $partner->getNombre() . "<li>";
+      echo "<li><img src=\"" . htmlspecialchars($partner->getUrlGallery())  . "\" alt=\"" . htmlspecialchars($partner->getDescripcion()) . "\" title=\"" . htmlspecialchars($partner->getDescripcion()) . "\" width=\"100px\"></li>";
+      echo "<li>" . htmlspecialchars($partner->getNombre()) . "<li>";
       echo "</ul>";
     }
   }

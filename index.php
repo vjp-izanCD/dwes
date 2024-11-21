@@ -10,6 +10,7 @@
   require_once "entities/repository/imagenGaleriaRepositorio.class.php";
   require_once "entities/repository/categoriaRepositorio.class.php";
   require "entities/categoria.class.php";
+  require_once "entities/repository/partnersRepositorio.class.php";
 
   $errores = [];
   $descripcion = "";
@@ -24,27 +25,6 @@
     $imagenRepositorio = new ImagenGaleriaRepositorio();
     $categoriaRepositorio = new CategoriaRepositorio();
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $descripcion = trim(htmlspecialchars($_POST["descripcion"] ?? ''));
-        $categoria = trim(htmlspecialchars($_POST["categoria"] ?? ''));
-
-        $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
-
-        // Verificar si se ha subido un archivo
-        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
-            $imagen = new File("imagen", $tiposAceptados);
-            $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
-            $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
-
-            $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
-            $imagenRepositorio->save($imagenGaleria);
-
-            $descripcion = "";
-            $mensaje = "Imagen guardada";
-        } else {
-            $errores[] = "Error al subir la imagen.";
-        }
-    } 
   } catch (FileException $exception) {
       $errores[] = $exception->getMessage();
   } catch (QueryException $exception) {
@@ -60,10 +40,26 @@
       $categorias = $categoriaRepositorio->findAll();
   }
 
-  $partners = [];
-  for ($i = 1; $i <= 3 ; $i++) { 
-    $partner = new Partner("Partners $i", "log$i.jpg", "Descripción del Partners $i");
-    array_push($partners, $partner);
+  try {
+    $config = require_once "app/config.php";
+
+    App::bind("config", $config);
+    $connection = App::getConnection();
+
+    $partnerRepositorio = new PartnersRepositorio();
+
+  } catch (FileException $exception) {
+      $errores[] = $exception->getMessage();
+  } catch (QueryException $exception) {
+      $errores[] = $exception->getMessage();
+  } catch (AppException $exception) {
+      $errores[] = $exception->getMessage();
+  } catch (PDOException $exception) {
+      $errores[] = $exception->getMessage();
+  } catch (Exception $exception) {
+      $errores[] = $exception->getMessage();
+  } finally {
+      $partners = $partnerRepositorio->findAll();
   }
 
   if (count($partners) > 3) {

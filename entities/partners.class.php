@@ -1,11 +1,15 @@
 <?php
-    class Partner{
+require_once "entities/database/IEntity.class.php";
+    class Partner implements IEntity {
         private $id;
-        private $nombre = "";
-        private $logo = "";
-        private $descripcion = "";
+        private $nombre;
+        private $logo;
+        private $descripcion;
 
-        public function __construct($nombre, $logo, $descripcion) {
+        const RUTA_IMAGENES_PORTFOLIO = "images/index/portfolio/";
+        const RUTA_IMAGENES_GALLERY = "images/index/gallery/";
+
+        public function __construct($nombre = "", $logo = "", $descripcion = "") {
             $this->id = null;
             $this->nombre = $nombre;
             $this->logo = $logo;
@@ -38,6 +42,23 @@
 
         public function setDescripcion($descripcion){
             $this->descripcion = $descripcion;
+        }
+
+        public function getUrlPortfolio(){
+            return self::RUTA_IMAGENES_PORTFOLIO . $this->getLogo();
+        }
+
+        public function getUrlGallery(){
+            return self::RUTA_IMAGENES_GALLERY . $this->getLogo();
+        }
+
+        public function toArray():array{
+            return [
+                "id"=>$this->getId(),
+                "nombre"=>$this->getNombre(),
+                "logo"=>$this->getLogo(),
+                "descripcion"=>$this->getDescripcion()
+            ];
         }
 
     }
