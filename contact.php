@@ -1,24 +1,31 @@
 <?php
+  require "entities/File.class.php";
+  require "entities/mensaje.class.php";
+  require "entities/connection.class.php";
+  require_once "entities/queryBuilder.class.php";
+  require_once "exceptions/appException.class.php";
+  require_once "entities/repository/mensajeRepositorio.class.php";
+
   $nombre = "";
   $apellidos = "";
-  $correo = "";
-  $subject = "";
-  $mensaje = "";
+  $email = "";
+  $asunto = "";
+  $texto = "";
   $errores = [];
   $mensajeExito = "";
   $claseDiv = "";
   $nombreFinal = "";
   $apellidosFinal = "";
-  $correoFinal = "";
-  $subjectFinal = "";
-  $mensajeFinal = "";
+  $emailFinal = "";
+  $asuntoFinal = "";
+  $textoFinal = "";
   
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
-    $correo = $_POST["correo"];
-    $subject = $_POST["subject"];
-    $mensaje = $_POST["mensaje"];
+    $email = $_POST["email"];
+    $asunto = $_POST["asunto"];
+    $texto = $_POST["texto"];
     $mensajeExito = "";
 
     if (empty($nombre)) {
@@ -32,20 +39,20 @@
       $mensajeExito .= "<li>Apellidos: $apellidos</li>";
     }
 
-    if (empty($correo)) {
-      $errores["correo"] = "El correo es requerido.";
-    } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-      $errores["correo"] = "El formato del correo es inválido.";
+    if (empty($email)) {
+      $errores["email"] = "El email es requerido.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $errores["email"] = "El formato del email es inválido.";
     } else {
-      $errores["correo"] = "";
-      $mensajeExito .= "<li>Correo: $correo</li>";
+      $errores["email"] = "";
+      $mensajeExito .= "<li>email: $email</li>";
     }
 
-    if (empty($subject)) {
-      $errores["subject"] = "El subject es requerido.";
+    if (empty($asunto)) {
+      $errores["asunto"] = "El asunto es requerido.";
     } else {
-      $errores["subject"] = "";
-      $mensajeExito .= "<li>Subject: $subject</li>";
+      $errores["asunto"] = "";
+      $mensajeExito .= "<li>Asunto: $asunto</li>";
     }
 
     if (!empty($mensaje)) {
@@ -56,9 +63,48 @@
 
       $nombreFinal = "";
       $apellidosFinal = "";
-      $correoFinal = "";
-      $subjectFinal = "";
-      $mensajeFinal = "";
+      $emailFinal = "";
+      $asuntoFinal = "";
+      $textoFinal = "";
+
+      $errores = [];
+      $descripcion = "";
+      $mensaje = "";
+
+      try {
+        $config = require_once "app/config.php";
+
+        App::bind("config", $config);
+        $connection = App::getConnection();
+
+        $mensajeRepositorio = new MensajeRepositorio();
+
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $nombre = trim(htmlspecialchars($nombre ?? ''));
+            $apellidos = trim(htmlspecialchars($apellidos ?? ''));
+            $email = trim(htmlspecialchars($email ?? ''));
+            $asunto = trim(htmlspecialchars($asunto ?? ''));
+            $texto = trim(htmlspecialchars($texto ?? ''));
+            $fecha = new DateTime();
+            $fecha = $fecha->format("Y-m-d H:i:s");
+            $mensaje = new Mensaje($nombre, $apellidos, $email, $asunto, $texto, $fecha);
+            $mensajeRepositorio->saveMensaje($mensaje);
+
+            $descripcion = "";
+        } 
+      } catch (FileException $exception) {
+          $errores[] = $exception->getMessage();
+      } catch (QueryException $exception) {
+          $errores[] = $exception->getMessage();
+      } catch (AppException $exception) {
+          $errores[] = $exception->getMessage();
+      } catch (PDOException $exception) {
+          $errores[] = $exception->getMessage();
+      } catch (Exception $exception) {
+          $errores[] = $exception->getMessage();
+      } finally {
+          $mensajes = $mensajeRepositorio->findAll();
+      }
 
       $mostrarMensaje = $mensajeExito;
 
@@ -69,8 +115,8 @@
 
       $nombreFinal = $nombre;
       $apellidosFinal = $apellidos;
-      $correoFinal = $correo;
-      $subjectFinal = $subject;
+      $emailFinal = $email;
+      $asuntoFinal = $asunto;
       $mensajeFinal = $mensaje;
 
       $claseDiv = "alert alert-danger";

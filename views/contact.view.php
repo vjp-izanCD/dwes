@@ -37,20 +37,20 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label for="correo" class="label-control">Email</label>
-						<input class="form-control" type="text" name="correo" value="<?php echo $correoFinal; ?>">
+						<label for="email" class="label-control">Email</label>
+						<input class="form-control" type="text" name="email" value="<?php echo $emailFinal; ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label for="subject" class="label-control">Subject</label>
-						<input class="form-control" type="text" name="subject" value="<?php echo $subjectFinal; ?>">
+						<label for="asunto" class="label-control">Subject</label>
+						<input class="form-control" type="text" name="asunto" value="<?php echo $asuntoFinal; ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<label for="mensaje" class="label-control">Message</label>
-						<textarea class="form-control" name="mensaje"><?php echo $mensajeFinal; ?></textarea>
+						<label for="texto" class="label-control">Message</label>
+						<textarea class="form-control" name="texto"><?php echo $textoFinal; ?></textarea>
 						<input type="submit" class="pull-right btn btn-lg sr-button" value="SEND">
 					</div>
 				</div>
