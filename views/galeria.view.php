@@ -22,7 +22,7 @@
                     <?php endif;?>
                 </div>
             <?php endif;?>
-            <form class="form_horizontal" method="post" enctype="multipart/form-data" action="<?= $_SERVER['PHP_SELF']?>">
+            <form class="form_horizontal" method="post" enctype="multipart/form-data" action="galeria/nueva">
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label class="label-control">Imagen</label>

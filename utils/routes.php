@@ -1,13 +1,10 @@
 <?php
-
-    return [
-        "" => "controllers/index.php",
-        "about" => "controllers/about.php",
-        "asociados" => "controllers/asociados.php",
-        "blog" => "controllers/blog.php",
-        "contact" => "controllers/contact.php",
-        "galeria" => "controllers/galeria.php",
-        "post" => "controllers/single_post.php"
-    ];
-
+    $router->get("", "controllers/index.php",);
+    $router->get("about", "controllers/about.php",);
+    $router->get("asociados", "controllers/asociados.php",);
+    $router->get("blog", "controllers/blog.php",);
+    $router->get("contact", "controllers/contact.php",);
+    $router->get("galeria", "controllers/galeria.php",);
+    $router->get("post", "controllers/post.php",);
+    $router->post("galeria/nueva", "controllers/galeria_nueva.php",);
 ?>

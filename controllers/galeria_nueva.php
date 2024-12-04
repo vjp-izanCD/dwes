@@ -16,8 +16,26 @@
   try {
 
     $imagenRepositorio = new ImagenGaleriaRepositorio();
-    $categoriaRepositorio = new CategoriaRepositorio();
-    
+
+    $descripcion = trim(htmlspecialchars($_POST["descripcion"] ?? ''));
+    $categoria = trim(htmlspecialchars($_POST["categoria"] ?? ''));
+
+    $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
+
+    // Verificar si se ha subido un archivo
+    if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
+        $imagen = new File("imagen", $tiposAceptados);
+        $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
+        $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
+
+        $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
+        $imagenRepositorio->save($imagenGaleria);
+
+        $descripcion = "";
+        $mensaje = "Imagen guardada";
+    } else {
+        $errores[] = "Error al subir la imagen.";
+    }
   } catch (FileException $exception) {
       $errores[] = $exception->getMessage();
   } catch (QueryException $exception) {
@@ -30,8 +48,7 @@
       $errores[] = $exception->getMessage();
   } finally {
       $imagenes = $imagenRepositorio->findAll();
-      $categorias = $categoriaRepositorio->findAll();
   }
 
-  require "views/galeria.view.php";
+header("Location: /galeria");
 ?>

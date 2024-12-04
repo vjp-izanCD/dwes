@@ -1,9 +1,9 @@
 <?php
     require_once "utils/bootstrap.php";
 
-    $routes = require "utils/routes.php";
-
-    $uri = trim($_SERVER["REQUEST_URI"], "/");
-
-    require $routes[$uri];
+    try{
+        require App::get("router")->direct(Request::uri(), $_SERVER["REQUEST_METHOD"]);
+    } catch(Exception $e) {
+        die($e->getMessage());
+    }
 ?>
