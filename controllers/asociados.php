@@ -14,28 +14,7 @@
   try {
 
     $partnerRepositorio = new PartnersRepositorio();
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $nombre = trim(htmlspecialchars($_POST["nombre"] ?? ''));
-        $descripcion = trim(htmlspecialchars($_POST["descripcion"] ?? ''));
-
-        $tiposAceptados = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
-
-        // Verificar si se ha subido un archivo
-        if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
-            $imagen = new File("imagen", $tiposAceptados);
-            $imagen->saveUploadFile(Partner::RUTA_IMAGENES_GALLERY);
-            $imagen->copyFile(Partner::RUTA_IMAGENES_GALLERY, Partner::RUTA_IMAGENES_PORTFOLIO);
-
-            $partner = new Partner($nombre, $imagen->getFileName(), $descripcion);
-            $partnerRepositorio->savePartner($partner);
-
-            $descripcion = "";
-            $mensaje = "Imagen guardada";
-        } else {
-            $errores[] = "Error al subir la imagen.";
-        }
-    } 
+    
   } catch (FileException $exception) {
       $errores[] = $exception->getMessage();
   } catch (QueryException $exception) {

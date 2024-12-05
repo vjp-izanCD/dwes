@@ -32,7 +32,9 @@
         $imagenRepositorio->save($imagenGaleria);
 
         $descripcion = "";
-        $mensaje = "Imagen guardada";
+        $mensaje = "Se ha guardado una nueva imagen: " . $imagenGaleria->getNombre();
+        App::get("logger")->info($mensaje);
+
     } else {
         $errores[] = "Error al subir la imagen.";
     }

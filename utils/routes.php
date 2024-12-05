@@ -7,4 +7,5 @@
     $router->get("galeria", "controllers/galeria.php",);
     $router->get("post", "controllers/post.php",);
     $router->post("galeria/nueva", "controllers/galeria_nueva.php",);
+    $router->post("asociados/nueva", "controllers/asociados_nueva.php",);
 ?>
