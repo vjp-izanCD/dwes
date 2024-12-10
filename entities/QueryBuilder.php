@@ -16,7 +16,7 @@ use PDOException;
 
 use Exception;
 
-require_once "utils/const.php";
+require_once "../utils/const.php";
 
 use proyecto\utils;
 

@@ -4,7 +4,7 @@ namespace proyecto\entities;
 
 use proyecto\exceptions\AppException;
 
-require_once "utils/const.php";
+require_once "../utils/const.php";
 
 use proyecto\utils;
 

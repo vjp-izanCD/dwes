@@ -7,7 +7,7 @@
   use proyecto\exceptions\QueryException;
   use proyecto\exceptions\AppException;
 
-  require_once "utils/utils.php";
+  require_once "../utils/utils.php";
 
   use proyecto\utils;
 
@@ -41,5 +41,5 @@
     $partners = utils\obtenerTresAleatorios($partners);
   }
 
-  require "views/index.view.php";
+  require "../views/index.view.php";
 ?>
