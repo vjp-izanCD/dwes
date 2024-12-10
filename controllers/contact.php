@@ -1,10 +1,12 @@
 <?php
-  require "entities/File.class.php";
-  require "entities/mensaje.class.php";
-  require "entities/connection.class.php";
-  require_once "entities/queryBuilder.class.php";
-  require_once "exceptions/appException.class.php";
-  require_once "entities/repository/mensajeRepositorio.class.php";
+  use proyecto\entities\Mensaje;
+  use proyecto\entities\repository\MensajeRepositorio;
+
+  use proyecto\entities\App;
+
+  use proyecto\exceptions\FileException;
+  use proyecto\exceptions\QueryException;
+  use proyecto\exceptions\AppException;
 
   $nombre = "";
   $apellidos = "";

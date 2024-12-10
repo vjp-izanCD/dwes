@@ -1,6 +1,12 @@
 <?php
 
-require_once "entities/app.class.php";
+namespace proyecto\entities;
+
+use PDO;
+
+use PDOException;
+
+use proyecto\exceptions\AppException;
 
 class Connection {
     public static function make() {

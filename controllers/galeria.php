@@ -1,13 +1,10 @@
 <?php
-  require "utils/utils.php";
-  require "entities/File.class.php";
-  require "entities/imagenGaleria.class.php";
-  require "entities/connection.class.php";
-  require_once "entities/queryBuilder.class.php";
-  require_once "exceptions/appException.class.php";
-  require_once "entities/repository/imagenGaleriaRepositorio.class.php";
-  require_once "entities/repository/categoriaRepositorio.class.php";
-  require "entities/categoria.class.php";
+  use proyecto\entities\repository\ImagenGaleriaRepositorio;
+  use proyecto\entities\repository\CategoriaRepositorio;
+
+  use proyecto\exceptions\FileException;
+  use proyecto\exceptions\QueryException;
+  use proyecto\exceptions\AppException;
 
   $errores = [];
   $descripcion = "";

@@ -1,16 +1,15 @@
 <?php
-  require "utils/utils.php";
-  require "entities/imagenGaleria.class.php";
-  require "entities/partners.class.php";
-  include_once "partners.php";
-  require "entities/File.class.php";
-  require "entities/connection.class.php";
-  require_once "entities/queryBuilder.class.php";
-  require_once "exceptions/appException.class.php";
-  require_once "entities/repository/imagenGaleriaRepositorio.class.php";
-  require_once "entities/repository/categoriaRepositorio.class.php";
-  require "entities/categoria.class.php";
-  require_once "entities/repository/partnersRepositorio.class.php";
+  use proyecto\entities\repository\PartnersRepositorio;
+  use proyecto\entities\repository\ImagenGaleriaRepositorio;
+  use proyecto\entities\repository\CategoriaRepositorio;
+
+  use proyecto\exceptions\FileException;
+  use proyecto\exceptions\QueryException;
+  use proyecto\exceptions\AppException;
+
+  require_once "utils/utils.php";
+
+  use proyecto\utils;
 
   $errores = [];
   $descripcion = "";
@@ -39,7 +38,7 @@
   }
 
   if (count($partners) > 3) {
-    $partners = obtenerTresAleatorios($partners);
+    $partners = utils\obtenerTresAleatorios($partners);
   }
 
   require "views/index.view.php";

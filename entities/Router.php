@@ -1,4 +1,8 @@
 <?php
+namespace proyecto\entities;
+
+use Exception;
+
     class Router {
         private $routes;
 

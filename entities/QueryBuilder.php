@@ -1,8 +1,24 @@
 <?php
 
+namespace proyecto\entities;
+
+use proyecto\entities\App;
+
+use proyecto\exceptions\QueryException;
+
+use proyecto\entities\database\IEntity;
+
+use proyecto\entities\ImagenGaleria;
+
+use PDO;
+
+use PDOException;
+
+use Exception;
+
 require_once "utils/const.php";
-require_once "exceptions/queryException.class.php";
-require_once "entities/app.class.php";
+
+use proyecto\utils;
 
 abstract class QueryBuilder {
 
@@ -24,7 +40,7 @@ abstract class QueryBuilder {
         $pdoStatement = $this->connection->prepare($sqlStatement);
 
         if (!$pdoStatement->execute()) {
-            throw new QueryException(getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
+            throw new QueryException(utils\getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
         }
 
         return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);
@@ -39,7 +55,7 @@ abstract class QueryBuilder {
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
 
-            if($entity instanceof imagenGaleria){
+            if($entity instanceof ImagenGaleria){
                 $this->incrementaNumCategorias($entity->getCategoria());
             }
         } catch (PDOException $excepcion) {

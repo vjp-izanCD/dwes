@@ -1,4 +1,6 @@
 <?php
+namespace proyecto\utils;
+
     function existeOpcionMenuActivaEnArray($opciones) {
         foreach ($opciones as $opcion) {
             if (esOpcionMenuActiva($opcion)) {

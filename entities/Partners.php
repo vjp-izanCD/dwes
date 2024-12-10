@@ -1,6 +1,7 @@
 <?php
-require_once "entities/database/IEntity.class.php";
-    class Partner implements IEntity {
+namespace proyecto\entities;
+
+    class Partners implements database\IEntity {
         private $id;
         private $nombre;
         private $logo;

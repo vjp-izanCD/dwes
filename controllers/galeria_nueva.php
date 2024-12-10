@@ -1,13 +1,14 @@
 <?php
-  require "utils/utils.php";
-  require "entities/File.class.php";
-  require "entities/imagenGaleria.class.php";
-  require "entities/connection.class.php";
-  require_once "entities/queryBuilder.class.php";
-  require_once "exceptions/appException.class.php";
-  require_once "entities/repository/imagenGaleriaRepositorio.class.php";
-  require_once "entities/repository/categoriaRepositorio.class.php";
-  require "entities/categoria.class.php";
+
+use proyecto\entities\repository\ImagenGaleriaRepositorio;
+use proyecto\entities\File;
+use proyecto\entities\ImagenGaleria;
+
+use proyecto\entities\App;
+
+use proyecto\exceptions\FileException;
+use proyecto\exceptions\QueryException;
+use proyecto\exceptions\AppException;
 
   $errores = [];
   $descripcion = "";
@@ -28,14 +29,14 @@
         $imagen->saveUploadFile(ImagenGaleria::RUTA_IMAGENES_GALLERY);
         $imagen->copyFile(ImagenGaleria::RUTA_IMAGENES_GALLERY, ImagenGaleria::RUTA_IMAGENES_PORTFOLIO);
 
-        $imagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
-        $imagenRepositorio->save($imagenGaleria);
+        $ImagenGaleria = new ImagenGaleria($imagen->getFileName(), $descripcion, $categoria);
+        $imagenRepositorio->save($ImagenGaleria);
 
         $descripcion = "";
-        $mensaje = "Se ha guardado una nueva imagen: " . $imagenGaleria->getNombre();
-        App::get("logger")->info($mensaje);
+        $mensaje = "Se ha guardado una nueva imagen: " . $ImagenGaleria->getNombre();
 
     } else {
+        App::get("logger")->info($mensaje);
         $errores[] = "Error al subir la imagen.";
     }
   } catch (FileException $exception) {

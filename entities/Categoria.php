@@ -1,6 +1,7 @@
 <?php
-    require_once "entities/database/IEntity.class.php";
-    class Categoria implements IEntity{
+    namespace proyecto\entities;
+
+    class Categoria implements database\IEntity{
         private $id;
         private $nombre;
         private $numImagenes;

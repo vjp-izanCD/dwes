@@ -1,5 +1,9 @@
 {
     "require":{
         "monolog/monolog": "^2.10"
+    },
+
+    "autoload": {
+        "psr-4": {"proyecto\\": ""}
     }
 }

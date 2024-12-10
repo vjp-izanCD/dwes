@@ -1,6 +1,8 @@
 <?php
     require_once "utils/utils.php";
 
+    use proyecto\utils;
+
     $claseActivaHome = "active";
     $claseActivaAbout = "";
     $claseActivaBlog = "";
@@ -12,7 +14,7 @@
         if (strpos($_SERVER["REQUEST_URI"], "about") !== false) {
             $claseActivaHome = "";
             $claseActivaAbout = "active";
-        } elseif (existeOpcionMenuActivaEnArray(["blog", "post"])) {
+        } elseif (utils\existeOpcionMenuActivaEnArray(["blog", "post"])) {
             $claseActivaHome = "";
             $claseActivaBlog = "active";
         } elseif (strpos($_SERVER["REQUEST_URI"], "contact") !== false) {

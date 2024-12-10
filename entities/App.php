@@ -1,6 +1,12 @@
 <?php
 
-require_once "exceptions/appException.class.php";
+namespace proyecto\entities;
+
+use proyecto\exceptions\AppException;
+
+require_once "utils/const.php";
+
+use proyecto\utils;
 
 class App {
     private static $container = [];
@@ -11,7 +17,7 @@ class App {
 
     public static function get($key) {
         if (!array_key_exists($key, self::$container)) {
-            throw new AppException(getErrorString(ERROR_APP_CORE));
+            throw new AppException(utils\getErrorString(ERROR_APP_CORE));
         }
         // Retornar el valor asociado a la clave
         return self::$container[$key];
