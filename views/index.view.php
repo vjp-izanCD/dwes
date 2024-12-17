@@ -1,6 +1,6 @@
-<?php include __DIR__ . "../partials/inicio-doc.parts.php"; ?>
+<?php include __DIR__ . "/partials/inicio-doc.parts.php"; ?>
 
-<?php include __DIR__ . "../partials/nav.parts.php"; ?>
+<?php include __DIR__ . "/partials/nav.parts.php"; ?>
 
 <!-- Principal Content Start -->
    <div id="index">
@@ -52,7 +52,7 @@
                       $likes = $img->getNumLikes();
                       $downloads = $img->getNumDescargas();
 
-                      include "../views/partials/imagegallery.parts.php";
+                      include "partials/imagegallery.parts.php";
                   }
                 ?>
               </div>
@@ -85,7 +85,7 @@
                     $likes = $img->getNumLikes();
                     $downloads = $img->getNumDescargas();
 
-                    include "../views/partials/imagegallery.parts.php";
+                    include "partials/imagegallery.parts.php";
                 }
                 ?>
               </div>
@@ -118,7 +118,7 @@
                   $likes = $img->getNumLikes();
                   $downloads = $img->getNumDescargas();
 
-                  include "../views/partials/imagegallery.parts.php";
+                  include "partials/imagegallery.parts.php";
                 }
                 ?>
              </div>
@@ -155,7 +155,7 @@
     <!-- End of Newsletter form -->  
 
     <!-- Box within partners name and logo -->
-    <?php include __DIR__ . "../partials/partners.parts.php"; ?>
+    <?php include __DIR__ . "/partials/partners.parts.php"; ?>
     <!-- End of Box within partners name and logo -->
 
    </div><!-- End of index box -->
@@ -180,4 +180,4 @@
        </div>
      </div>
    </footer>
-   <?php include __DIR__ . "../partials/fin-doc.parts.php"; ?>
+   <?php include __DIR__ . "/partials/fin-doc.parts.php"; ?>

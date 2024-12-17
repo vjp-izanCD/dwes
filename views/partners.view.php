@@ -1,6 +1,7 @@
 <?php include __DIR__ . "/partials/inicio-doc.parts.php"; ?>
 <?php include __DIR__ . "/partials/nav.parts.php"; ?>
 
+
 <div id="partners">
     <div class="container">
         <div class="col-xs-12 col-sm-push-2">

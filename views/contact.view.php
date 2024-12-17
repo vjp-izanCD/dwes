@@ -1,6 +1,6 @@
-<?php include __DIR__ . "../partials/inicio-doc.parts.php"; ?>
+<?php include __DIR__ . "/partials/inicio-doc.parts.php"; ?>
 
-<?php include __DIR__ . "../partials/nav.parts.php"; ?>
+<?php include __DIR__ . "/partials/nav.parts.php"; ?>
 
 <!-- Principal Content Start -->
 <div id="contact">
@@ -86,4 +86,4 @@
 		</div>   
 	</div>
 </div>
-<?php include __DIR__ . "../partials/fin-doc.parts.php"; ?>
+<?php include __DIR__ . "/partials/fin-doc.parts.php"; ?>

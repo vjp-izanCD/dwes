@@ -18,8 +18,6 @@ use Exception;
 
 require_once "../utils/const.php";
 
-use proyecto\utils;
-
 abstract class QueryBuilder {
 
     private $connection;
@@ -40,7 +38,7 @@ abstract class QueryBuilder {
         $pdoStatement = $this->connection->prepare($sqlStatement);
 
         if (!$pdoStatement->execute()) {
-            throw new QueryException(utils\getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
+            throw new QueryException(getErrorString(ERROR_STRINGS[ERROR_EXECUTE_STATEMENT]));
         }
 
         return $pdoStatement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->classEntity);

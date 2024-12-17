@@ -8,7 +8,10 @@
             <h4>Our Main Partners</h4>
             <hr>
             <div class="text-muted text-left">
-                <?php mostrarPartners($partners) ?>
+                <?php
+                    require "../controllers/partners.php";
+                    mostrarPartners($partners);
+                ?>
             </div>
         </div>
     </div>

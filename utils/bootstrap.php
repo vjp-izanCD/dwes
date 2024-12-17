@@ -1,6 +1,8 @@
 <?php 
     require_once "../vendor/autoload.php";
 
+    require_once "../utils/utils.php";
+
     use proyecto\entities\App;
   
     use proyecto\entities\Router;

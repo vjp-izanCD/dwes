@@ -9,8 +9,6 @@
 
   require_once "../utils/utils.php";
 
-  use proyecto\utils;
-
   $errores = [];
   $descripcion = "";
   $mensaje = "";
@@ -38,7 +36,7 @@
   }
 
   if (count($partners) > 3) {
-    $partners = utils\obtenerTresAleatorios($partners);
+    $partners = obtenerTresAleatorios($partners);
   }
 
   require "../views/index.view.php";

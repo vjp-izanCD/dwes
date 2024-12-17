@@ -1,7 +1,8 @@
 <?php
 namespace proyecto\entities;
+use proyecto\entities\database\IEntity;
 
-    class ImagenGaleria implements database\IEntity{
+    class ImagenGaleria implements IEntity{
         private $nombre;
         private $descripcion;
         private $numVisualizaciones;

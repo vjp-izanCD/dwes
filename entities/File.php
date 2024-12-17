@@ -6,8 +6,6 @@ use proyecto\exceptions\FileException;
 
 require_once "../utils/const.php";
 
-use proyecto\utils;
-
 class File {
     private $file = "";
     private $fileName = "";
@@ -22,7 +20,7 @@ class File {
         }
 
         if ($this->file["error"] !== UPLOAD_ERR_OK) {
-            throw new FileException(utils\getErrorString($this->file["error"]));
+            throw new FileException(getErrorString($this->file["error"]));
         }
 
         if (in_array($this->file["type"], $arrTypes) === false) {

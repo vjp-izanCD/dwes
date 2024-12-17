@@ -1,5 +1,4 @@
 <?php
-namespace proyecto\utils;
 
     define("ERROR_MV_UP_FILE", 9);
 
